@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="">
-  <head>
-    <meta name="generator"
-    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
-    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" />
+  <head>   
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/signin.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script>
       function TodoCtrl($scope) {
@@ -27,7 +26,7 @@
           };
 
           $scope.difference = function () {
-              return $scope.cantidad - Math.round(($scope.de7() * 7 - $scope.de2() * 2) * 100) / 100;
+              return $scope.cantidad - Math.round(($scope.de7() * 7 + $scope.de2() * 2) * 100) / 100;
           };
 
           $scope.possitive = function () {
@@ -35,32 +34,26 @@
           };
 
       }
-    </script>
-    <style>
-    .diff-true {
-      color: blue;
-    }
-    .diff-false {
-      color: red;
-    }
-     
-    </style>
-    <title>Calcula cuantos tickets</title>
+    
+</script>
+    <title>Calcula cuantos tickets!</title>
   </head>
   <body>
-    <div ng-app="">
-      <h2>How many Tickets?</h2>
-      <div ng-controller="TodoCtrl">
-        <input type="number" ng-model="cantidad" placeholder="Insert the amount here" />
-        <ul class="unstyled">
-          <li>
+    <div class="container">
+      <div class="row">
+        <div ng-controller="TodoCtrl"
+        class="panel col-xs-6 col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+          <h2 class="text-center">Cuantos Tickets?</h2>
+          <input type="number" ng-model="cantidad" placeholder="Insert the amount here"
+          class="form-control input-large text-right" />
+          <div class="center-everything">
             <label>{{de7()}} de 7</label>
-          </li>
-          <li>
+            <br />
             <label>{{de2()}} de 2</label>
-          </li>
-        </ul>
-        <label class="diff-{{possitive()}}">Diferencia: {{difference()}}</label>
+            <br />
+            <label class="diff-{{possitive()}}">Diferencia: {{difference()}}</label>
+          </div>
+        </div>
       </div>
     </div>
   </body>
