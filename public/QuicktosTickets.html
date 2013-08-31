@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="">
+  <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script>
+      function TodoCtrl($scope) {
+
+          $scope.cantidad = 0;
+
+          $scope.de7 = function () {
+              var count = 0;
+              if ($scope.cantidad >= 9) {
+                  count = Math.round($scope.cantidad / 9);
+              } else if ($scope.cantidad >= 7) {
+                  count = Math.round($scope.cantidad / 7);
+              }
+              return count;
+          };
+
+          $scope.de2 = function () {
+              var count = 0;
+              count = Math.round(($scope.cantidad - ($scope.de7() * 7)) / 2);
+              return count;
+          };
+
+          $scope.difference = function () {
+              return $scope.cantidad - Math.round(($scope.de7() * 7 - $scope.de2() * 2) * 100) / 100;
+          };
+
+          $scope.possitive = function () {
+              return $scope.difference() >= 0;
+          };
+
+      }
+    </script>
+    <style>
+    .diff-true {
+      color: blue;
+    }
+    .diff-false {
+      color: red;
+    }
+     
+    </style>
+    <title>Calcula cuantos tickets</title>
+  </head>
+  <body>
+    <div ng-app="">
+      <h2>How many Tickets?</h2>
+      <div ng-controller="TodoCtrl">
+        <input type="number" ng-model="cantidad" placeholder="Insert the amount here" />
+        <ul class="unstyled">
+          <li>
+            <label>{{de7()}} de 7</label>
+          </li>
+          <li>
+            <label>{{de2()}} de 2</label>
+          </li>
+        </ul>
+        <label class="diff-{{possitive()}}">Diferencia: {{difference()}}</label>
+      </div>
+    </div>
+  </body>
+</html>
