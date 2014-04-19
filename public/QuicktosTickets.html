@@ -3,7 +3,9 @@
   <head>   
     <meta content='width=device-width, initial-scale=1.0' name='viewport'>
     <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/signin.css" />
+    <link rel="stylesheet" href="css/signin.css" />    
+    <title>Calcula cuantos tickets!</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script>
       function TodoCtrl($scope) {
@@ -17,12 +19,26 @@
               } else if ($scope.cantidad >= 7) {
                   count = Math.round($scope.cantidad / 7);
               }
+
+              d3.select(".chart")
+                .selectAll("#de7")             
+                .data([count])
+                .style("width", function(d) { return d * 10 + "px"; })
+                .text(function(d) { if(d>0)  return ("7x: " + d); return ""; });
+
               return count;
           };
 
           $scope.de2 = function () {
               var count = 0;
               count = Math.round(($scope.cantidad - ($scope.de7() * 7)) / 2);
+
+              d3.select(".chart")
+                .selectAll("#de2")             
+                .data([count])
+                .style("width", function(d) { return d * 10 + "px"; })
+                .text(function(d) { if(d>0) return "2x: " + d; return ""; });
+
               return count;
           };
 
@@ -33,11 +49,8 @@
           $scope.possitive = function () {
               return $scope.difference() >= 0;
           };
-
-      }
-    
-</script>
-    <title>Calcula cuantos tickets!</title>
+      }    
+    </script>    
   </head>
   <body>
     <div class="container">
@@ -53,9 +66,15 @@
             <label>{{de2()}} de 2</label>
             <br />
             <label class="diff-{{possitive()}}">Diferencia: {{difference()}}</label>
-          </div>
+            <div class="chart">
+              <div class="bar" id="de7"></div>
+              <br />
+              <div class="bar" id="de2"></div>
+            </div>
+          </div>  
         </div>
       </div>
     </div>
+
   </body>
 </html>

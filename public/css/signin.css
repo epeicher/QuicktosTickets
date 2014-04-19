@@ -33,3 +33,15 @@ label {
 .diff-false {
   color: red;
 }
+
+.chart{
+
+}
+
+.bar{
+  text-align: right;
+  background-color: steelblue;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
